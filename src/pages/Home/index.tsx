@@ -1,8 +1,9 @@
 import { useHistory } from 'react-router-dom'
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
 import illustrationImg from '../../assets/images/illustration.svg'
-import logoImg from '../../assets/images/logo2.svg';
+import LogoLight from '../../assets/images/logo-light.svg';
+import LogoDark from '../../assets/images/logo-dark.svg';
 import googleIconImg from '../../assets/images/google-icon.svg';
 
 import { database } from '../../services/firebase';
@@ -12,14 +13,15 @@ import Swal from 'sweetalert2';
 import { CustomButton } from '../../components/CustomButton';
 import { useAuth } from '../../hooks/useAuth';
 
-// import '../../styles/auth.scss';
 import { ChangeTheme } from '../../components/ChangeTheme';
 import { PageAuth } from './styles';
+import { ThemeContext } from 'styled-components';
 
 export function Home() {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth()
   const [roomCode, setRoomCode] = useState('');
+  const { title } = useContext(ThemeContext);
 
   async function handleCreateRoom() {
     if (!user) {
@@ -67,7 +69,7 @@ export function Home() {
         <Grid item sm={6} xs={12}>
           <main>
             <div className="main-content">
-              <img src={logoImg} alt="Letmeask" />
+              <img src={ title === 'light' ? LogoLight : LogoDark } alt="AskOrganizer" />
               <button onClick={handleCreateRoom} className="create-room">
                 <img src={googleIconImg} alt="Logo do Google" />
                 Crie sua sala com o Google

@@ -1,17 +1,18 @@
-import { Container, Grid } from '@material-ui/core';
-import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { Container, Grid, Hidden } from '@material-ui/core';
+import { FormEvent, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
 
-import logoImg from '../assets/images/logo2.svg';
+import LogoLight from '../../assets/images/logo-light.svg';
+import LogoDark from '../../assets/images/logo-dark.svg';
 
-import { CustomButton } from '../components/CustomButton';
-import { Question } from '../components/Question';
-import { RoomCode } from '../components/RoomCode';
-import { useAuth } from '../hooks/useAuth';
-import { useRoom } from '../hooks/useRoom';
-import { database } from '../services/firebase';
-
-import '../styles/room.scss';
+import { CustomButton } from '../../components/CustomButton';
+import { Question } from '../../components/Question';
+import { RoomCode } from '../../components/RoomCode';
+import { useAuth } from '../../hooks/useAuth';
+import { useRoom } from '../../hooks/useRoom';
+import { database } from '../../services/firebase';
+import { PageRoom } from './styles';
+import { ChangeTheme } from '../../components/ChangeTheme';
 
 
 type RoomParams = {
@@ -22,9 +23,20 @@ export function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
+  const [currentTheme, setCurrentTheme] = useState('');
   const roomId = params.id;
-
-  const { title, questions } = useRoom(roomId)
+  
+  const { authorId, title, questions } = useRoom(roomId);
+  
+  const storageValue = localStorage.getItem('theme');
+  useEffect(() => {
+    if(storageValue) {
+      setCurrentTheme(JSON.parse(storageValue).title);
+    }
+    else {
+      setCurrentTheme('light');
+    }
+  }, [currentTheme, setCurrentTheme, storageValue])
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -63,12 +75,21 @@ export function Room() {
   }
 
   return (
-    <div id="page-room">
+    <PageRoom>
       <header>
         <Container>
           <div className="content">
-            <img src={logoImg} alt="Letmeask" />
-            <RoomCode code={roomId} />
+            <Link to="/">
+              <img className='logo' src={ currentTheme === 'light' ? LogoLight : LogoDark } alt="Askorganizer" />
+            </Link>
+            <div>
+              <RoomCode code={roomId} />
+              { authorId && user?.id && ( authorId === user?.id ) && (
+                <Link to={`/admin/rooms/${roomId}`}>
+                  <CustomButton isOutlined>Ir para Admin</CustomButton>
+                </Link>
+              )}
+            </div>
           </div>
         </Container>
       </header>
@@ -131,9 +152,14 @@ export function Room() {
                 })}
               </div>
             </main>
+            <Hidden smDown>
+              <div className="theme-switch">
+                <ChangeTheme />
+              </div>
+            </Hidden>
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </PageRoom>
   );
 }

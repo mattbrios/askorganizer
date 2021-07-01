@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ThemeProvider, DefaultTheme, createGlobalStyle } from 'styled-components';
 import usePeristedState from './hooks/usePersistedState';
 
 import light from './styles/themes/light';
@@ -11,7 +11,14 @@ import { NewRoom } from "./pages/NewRoom";
 import { Room } from './pages/Room';
 import { AdminRoom } from './pages/AdminRoom';
 
-import { AuthContextProvider } from './contexts/AuthContext'
+import { AuthContextProvider } from './contexts/AuthContext';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${ props => props.theme.colors.background};
+    color: ${ props => props.theme.colors.text};
+  }
+`
 
 function App() {
   const [theme, setTheme] = usePeristedState<DefaultTheme>('theme', light);
@@ -33,6 +40,7 @@ function App() {
           </Switch>
         </AuthContextProvider>
       </ThemeProvider>
+      <GlobalStyle theme={theme} />
     </BrowserRouter>
   );
 }

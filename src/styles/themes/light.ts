@@ -3,11 +3,12 @@ export default {
   title: 'light',
 
   colors: {
-    primary: '#835AFD',
-    secundary: '#e559f9',
+    primary: '#00695C',
+    secundary: '#592E83',
     light: '#FFFFFF',
     dark: '#222222',
     google: '#ea4335',
+    headerLine: '#e2e2e2',
 
     background: '#fafafa',
     text: '#333',
@@ -15,7 +16,7 @@ export default {
     lightText: '#737380',
 
     bgQuestion: '#fefefe',
-    bgHighlighted: '#F4F0FF',
+    bgHighlighted: '#E0F2F1',
     bgAnswered: '#DBDCDD',
     questionText: '#29292e'
   },

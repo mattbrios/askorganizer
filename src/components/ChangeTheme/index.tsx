@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { Switch } from '@material-ui/core';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { ThemeContext } from 'styled-components';
 import { useAuth } from '../../hooks/useAuth';
 

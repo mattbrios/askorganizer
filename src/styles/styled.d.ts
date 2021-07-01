@@ -10,6 +10,7 @@ declare module 'styled-components' {
       light: string;
       dark: string;
       google: string;
+      headerLine: string;
 
       background: string;
       text: string;

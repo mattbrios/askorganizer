@@ -3,20 +3,21 @@ export default {
   title: 'dark',
 
   colors: {
-    primary: '#333',
-    secundary: '#C62E65',
+    primary: '#455A64',
+    secundary: '#1565C0',
     light: '#FFFFFF',
     dark: '#222222',
     google: '#ea4335',
+    headerLine: '#424242',
 
     background: '#222',
-    text: '#fff',
+    text: '#ECEFF1',
     inputBorder: '#a8a8b3',
     lightText: '#737380',
 
-    bgQuestion: '#fefefe',
-    bgHighlighted: '#F4F0FF',
-    bgAnswered: '#DBDCDD',
-    questionText: '#29292e'
+    bgQuestion: '#191919',
+    bgHighlighted: '#37474F',
+    bgAnswered: '#424242',
+    questionText: '#e2e2e2'
   },
 };

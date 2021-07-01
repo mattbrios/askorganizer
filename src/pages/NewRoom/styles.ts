@@ -1,7 +1,9 @@
-#page-auth {
+import styled from "styled-components";
+
+export const PageAuth = styled.div`
   aside {
-    background: #835afd;
-    color: #FFF;
+    background: ${ props => props.theme.colors.primary };
+    color: ${ props => props.theme.colors.light };
 
     display: flex;
     flex-direction: column;
@@ -24,7 +26,8 @@
       font-size: 24px;
       line-height: 32px;
       margin-top: 16px;
-      color: #f8f8f8;
+      color: ${ props => props.theme.colors.light };
+      opacity: 0.85;
     }
 
     @media screen and (max-width: 768px) {
@@ -39,6 +42,7 @@
 
   main {
     padding: 0 32px;
+    background-color: ${ props => props.theme.colors.background };
 
     display: flex;
     align-items: center;
@@ -76,8 +80,8 @@
         height: 50px;
         border-radius: 8px;
         padding: 0 16px;
-        background: #FFF;
-        border: 1px solid #a8a8b3;
+        background: ${ props => props.theme.colors.light };
+        border: 1px solid ${ props => props.theme.colors.inputBorder };
       }
 
       button { 
@@ -91,11 +95,11 @@
 
     p {
       font-size: 14px;
-      color: #737380;
+      color: ${ props => props.theme.colors.lightText };
       margin-top: 16px;
 
       a {
-        color: #e559f9;
+        color: ${ props => props.theme.colors.secundary };
       }
     }
   }
@@ -105,8 +109,8 @@
     height: 50px;
     border-radius: 8px;
     font-weight: 500;
-    background: #ea4335;
-    color: #FFF;
+    background: ${ props => props.theme.colors.google };
+    color: ${ props => props.theme.colors.light };
 
     display: flex;
     justify-content: center;
@@ -128,7 +132,7 @@
 
   .separator {
     font-size: 14px;
-    color: #a8a8b3;
+    color: ${ props => props.theme.colors.inputBorder };
 
     margin: 32px 0;
     display: flex;
@@ -138,7 +142,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #a8a8b3;
+      background: ${ props => props.theme.colors.inputBorder };
       margin-right: 16px;
     }
 
@@ -146,7 +150,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #a8a8b3;
+      background: ${ props => props.theme.colors.inputBorder };
       margin-left: 16px;
     }
   }
@@ -155,4 +159,4 @@
     top: 1rem;
     right: 1rem;
   }
-}
+`;
